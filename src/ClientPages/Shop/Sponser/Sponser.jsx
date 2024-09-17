@@ -7,7 +7,7 @@ import Sponser5 from "../../../../public/sponser5.png";
 export default function Sponser(){
     return(
         <>
-            <section className="w-full bg-black h-[122px]">
+            <section className="w-full bg-black h-[122px]" id="brands">
                 <div className="h-full w-[1240px] mx-auto flex flex-row justify-between items-center">
                     <div className="w-[165px] h-[33px]">
                         <img src={Sponser1} alt="Sponser1" className="h-full w-full object-cover" />

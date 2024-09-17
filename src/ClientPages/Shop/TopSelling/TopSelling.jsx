@@ -7,7 +7,7 @@ import TopSelling4 from "../../../../public/topSelling4.png";
 export default function TopSelling(){
     return(
         <>
-            <section className="w-full mx-auto mt-[64px]">
+            <section className="w-full mx-auto mt-[64px]" id="topSelling">
         <div className="w-[1240px] mx-auto text-center mb-[55px]">
           <h2 className="capitalize font-bold text-5xl text-black font-googleFont">
             top selling

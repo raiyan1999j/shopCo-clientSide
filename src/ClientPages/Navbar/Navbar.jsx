@@ -25,9 +25,13 @@ export default function Navbar(){
                             shop
                             </NavLink>
                             </li>
-                            <li className="mr-6">on sale</li>
-                            <li className="mr-6">new arrivals</li>
-                            <li>brands</li>
+                            <a className="mr-6" href="#topSelling">
+                            on sale
+                            </a>
+                            <a className="mr-6" href="#newArrivals">
+                            new arrivals
+                            </a>
+                            <a href="#brands">brands</a>
                         </ul>
                     </div>
                     <div>

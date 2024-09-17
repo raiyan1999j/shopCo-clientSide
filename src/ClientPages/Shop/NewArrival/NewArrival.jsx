@@ -7,7 +7,7 @@ import New4 from "../../../../public/new4.png"
 export default function NewArrival() {
   return (
     <>
-      <section className="w-full mx-auto mt-[72px]">
+      <section className="w-full mx-auto mt-[72px]" id="newArrivals">
         <div className="w-[1240px] mx-auto text-center mb-[55px]">
           <h2 className="capitalize font-bold text-5xl text-black font-googleFont">
             new arrivals
