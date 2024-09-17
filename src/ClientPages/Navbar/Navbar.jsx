@@ -2,6 +2,7 @@ import { CgProfile } from "react-icons/cg";
 import { FaSearch } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { IoIosSearch } from "react-icons/io";
+import { NavLink, useLocation } from "react-router-dom";
 import Search from "../../../public/search.png";
 import Cart from "../../../public/cart.png";
 import Profile from "../../../public/profile.png"
@@ -19,7 +20,11 @@ export default function Navbar(){
                     </div>
                     <div>
                         <ul className="flex flex-row capitalize">
-                            <li className="mr-6">shop</li>
+                            <li className="mr-6 relative before:content-'' before:absolute before:w-full before:h-1 before:rounded-lg before:bg-rose-500 before:bottom-0 before:left-0 before:origin-right before:scale-x-0 before:transition before:duration-300 before:ease-in hover:before:origin-left hover:before:scale-x-100">
+                            <NavLink to="/shop">
+                            shop
+                            </NavLink>
+                            </li>
                             <li className="mr-6">on sale</li>
                             <li className="mr-6">new arrivals</li>
                             <li>brands</li>
