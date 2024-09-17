@@ -1,4 +1,5 @@
 import Banner from "./Banner/Banner";
+import NewArrival from "./NewArrival/NewArrival";
 import Sponser from "./Sponser/Sponser";
 
 export default function Shop(){
@@ -6,6 +7,7 @@ export default function Shop(){
         <>
             <Banner/>
             <Sponser/>
+            <NewArrival/>
         </>
     )
 }
