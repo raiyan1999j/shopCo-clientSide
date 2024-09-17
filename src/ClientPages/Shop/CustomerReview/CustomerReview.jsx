@@ -6,7 +6,7 @@ import Badge from "../../../../public/badge.png";
 export default function CustomerReview(){
     return(
         <>
-            <section className="w-[1240px] mx-auto">
+            <section className="w-[1240px] mt-20 mx-auto">
                 <div className="flex flex-row justify-between items-center mb-10 w-full">
                     <div>
                         <h2 className="text-black font-googleFont capitalize text-5xl leading-normal">
