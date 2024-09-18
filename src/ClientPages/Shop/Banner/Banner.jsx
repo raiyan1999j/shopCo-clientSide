@@ -2,7 +2,7 @@
 export default function Banner(){
     return(
         <>
-            <section className=" w-full mx-auto bg-bannerImg bg-no-repeat pt-[103px] pb-[116px] mt-6">
+            <section className=" w-full mx-auto bg-bannerImg bg-no-repeat pt-[103px] pb-[116px]">
                 <div className="w-[1240px] relative mx-auto after:content-'' after:absolute after:bg-vectorBig after:right-0 after:h-[104px] after:w-[104px] after:top-0 before:absolute before:h-[56px] before:w-[56px] before:top-[146px] before:bg-vectorSmall before:left-[651px]">
                     <div className="w-[577px]">
                         <h2 className="text-black font-googleFont font-bold text-[64px] leading-[64px] uppercase">
