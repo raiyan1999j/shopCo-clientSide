@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom"
 
 export default function Category(){
+    const navigate = useNavigate();
     return(
         <>
             <section className="w-[1240px] mx-auto bg-[#F0F0F0] rounded-[40px] mt-[60px]">
@@ -9,7 +11,7 @@ export default function Category(){
                     </h2>
                 </div>
                 <div className="grid grid-cols-[407px_684px] gap-x-5 mx-[64px]">
-                    <div className="w-full h-[289px] rounded-[20px] bg-casual bg-no-repeat bg-contain">
+                    <div className="w-full h-[289px] rounded-[20px] bg-casual bg-no-repeat bg-contain" onClick={()=>{navigate('/productCategory')}}>
                         <div className="pt-[25px] pl-[36px]">
                             <h2 className="text-black font-fontShare capitalize font-bold text-[36px]">
                                 casual
