@@ -1,11 +1,21 @@
+import { useState } from "react";
 import Facebook from "../../../public/facebook.png";
 import Google from "../../../public/google.png";
 
 export default function CreateAccount({switchMode}){
+    const [condition,setCondition] = useState(false);
+
+    const modeSwitch=()=>{
+        setCondition(true);
+
+        setTimeout(()=>{
+            switchMode(true)
+        },300)
+    }
 
     return(
         <>
-        <section className="w-[1240px] mx-auto mt-6">
+        <section className={`w-[1240px] mx-auto mt-6 ${condition?"opacity-0 transition-all duration-200 ease-out":"opacity-100 transition-all duration-200 ease-in"}`}>
             <div className="w-[712px] mx-auto">
                 <div className="w-full text-center">
                     <h2 className="text-[#333] text-[32px] font-fontShare font-medium leading-normal">Create an account</h2>
@@ -13,7 +23,7 @@ export default function CreateAccount({switchMode}){
                 <div className="w-full text-center">
                     <p className="text-[#333] text-base font-normal  leading-normal font-fontShare">
                         Already have an account? 
-                        <span className="text-[#111] underline" onClick={()=>{switchMode(true)}}>Log in</span>
+                        <span className="text-[#111] underline" onClick={modeSwitch}>Log in</span>
                     </p>
                 </div>
 

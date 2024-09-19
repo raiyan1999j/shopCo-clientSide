@@ -8,7 +8,7 @@ export default function CreateOrLogin(){
         <>
             {
                 condition?
-                <Login/>:
+                <Login switchMode={(value)=>{setCondition(value)}}/>:
                 <CreateAccount switchMode={(value)=>{setCondition(value)}}/>
             }
         </>
