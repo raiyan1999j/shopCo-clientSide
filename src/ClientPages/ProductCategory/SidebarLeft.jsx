@@ -8,7 +8,7 @@ import Option from "../../../public/option.png";
 export default function SidebarLeft() {
   return (
     <>
-      <div className="border border-[#0000001a] rounded-[20px] py-5 px-6">
+      <div className="w-[295px] float-left border border-[#0000001a] rounded-[20px] py-5 px-6">
         <div className="after:content-'' after:h-[1px] after:w-full after:table after:bg-[#0000001a] after:mt-6">
           <div className="flex flex-row justify-between items-center">
             <div>

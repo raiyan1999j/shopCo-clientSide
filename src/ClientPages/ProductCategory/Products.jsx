@@ -19,7 +19,7 @@ export default function Products(){
             </div> 
 
             <div className="w-full mx-auto mt-6">
-                <div className="grid grid-cols-[295px_808px] gap-x-[21px]">
+                <div className="w-full before:content-'' before:table after:content-'' after:table after:clear-both">
                     <SidebarLeft/>
                     <SidebarRight/>
                 </div>
