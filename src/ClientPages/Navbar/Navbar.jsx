@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Search from "../../../public/search.png";
 import Cart from "../../../public/cart.png";
 import Profile from "../../../public/profile.png"
@@ -8,6 +8,7 @@ import { useState } from "react";
 
 export default function Navbar(){
     const [menu,setMenu] = useState(false);
+    const navigate = useNavigate();
     const openMenu=(value)=>{
         setMenu(!menu)
     }
@@ -51,7 +52,7 @@ export default function Navbar(){
                     </div>
                     <div className="flex flex-row">
                         <span className="mr-[14px]">
-                         <div>
+                         <div onClick={()=>{navigate("/cart")}}>
                             <img src={Cart} alt="cart" />
                          </div>
                         </span>
