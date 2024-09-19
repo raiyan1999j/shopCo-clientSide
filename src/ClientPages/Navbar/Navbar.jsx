@@ -57,7 +57,7 @@ export default function Navbar(){
                          </div>
                         </span>
                         <span>
-                        <div>
+                        <div onClick={()=>{navigate("/createOrLogin")}}>
                             <img src={Profile} alt="profile" />
                         </div>
                         </span>
