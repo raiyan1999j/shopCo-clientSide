@@ -17,17 +17,20 @@ export default function Navbar(){
         <section className="w-[1240px] mx-auto after:content-'' after:h-[1px] after:w-full after:bg-[#0000001a] after:table after:mt-6">
             <nav className="h-[48px]">
                 <div className="grid grid-cols-[160px_321px_577px_62px] gap-x-10 items-center">
-                    <div>
+                    <div className=" hover:cursor-pointer" onClick={()=>{navigate("/shop")}}>
                         <h1 className=" uppercase text-black font-googleFont font-bold text-[32px]">
                             shop.co
-                        </h1>
+                        </h1> 
                     </div>
                     <div>
                         <ul className="flex flex-row capitalize">
-                            <li className="mr-6 relative before:content-'' before:absolute before:w-full before:h-1 before:rounded-lg before:bg-rose-500 before:bottom-0 before:left-0 before:origin-right before:scale-x-0 before:transition before:duration-300 before:ease-in hover:before:origin-left hover:before:scale-x-100" onClick={openMenu}>
+                            <li className="mr-6 relative group before:content-'' before:absolute before:w-full before:h-1 before:rounded-lg before:bg-rose-500 before:bottom-0 before:left-0 before:origin-right before:scale-x-0 before:transition before:duration-300 before:ease-in hover:before:origin-left hover:before:scale-x-100" onClick={openMenu}>
                             <NavLink to="/shop" className="flex flex-row items-center">
                             shop <MdKeyboardArrowDown className="ml-1" />
                             </NavLink>
+                            <div className="absolute transition-all duration-300 ease-in-out h-0 w-0 opacity-0 group-hover:opacity-100 group-hover:ease-in z-30 group-hover:h-[400px] group-hover:w-[925px]">
+                                <DropDown/>
+                            </div>
                             </li>
                             <a className="mr-6" href="#topSelling">
                             on sale
@@ -51,12 +54,12 @@ export default function Navbar(){
                         </div>
                     </div>
                     <div className="flex flex-row">
-                        <span className="mr-[14px]">
+                        <span className="mr-[14px] hover:cursor-pointer">
                          <div onClick={()=>{navigate("/cart")}}>
                             <img src={Cart} alt="cart" />
                          </div>
                         </span>
-                        <span>
+                        <span className="hover:cursor-pointer">
                         <div onClick={()=>{navigate("/createOrLogin")}}>
                             <img src={Profile} alt="profile" />
                         </div>
@@ -65,7 +68,7 @@ export default function Navbar(){
                 </div>
             </nav>
         </section>
-        <DropDown menuCondition={menu} menuOpen={()=>{openMenu()}}/>
+        {/* <DropDown menuCondition={menu} menuOpen={()=>{openMenu()}}/> */}
         </>
     )
 }

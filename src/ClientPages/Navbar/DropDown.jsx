@@ -4,7 +4,7 @@ export default function DropDown({menuCondition,menuOpen}){
     const navigate = useNavigate();
     return(
         <>
-        <section className={`transition-all duration-300 ease-in bg-[#F0EEED] absolute left-[300px] z-30 rounded-xl py-6 ${menuCondition?"h-[400px] w-[925px] opacity-100":"h-0 w-0 opacity-0"}`}>
+        <section className="bg-[#F0EEED] rounded-xl py-6 h-full w-full">
             <div className="h-[90%] w-[90%] mx-auto grid grid-cols-4 gap-x-5">
                 <div>
                     <h2 className="capitalize font-fontShare text-black font-bold text-xl">
