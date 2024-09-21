@@ -1,17 +1,16 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Search from "../../../public/search.png";
 import Cart from "../../../public/cart.png";
 import Profile from "../../../public/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md";
 import DropDown from "./DropDown";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Navbar(){
-    const [menu,setMenu] = useState(false);
     const navigate = useNavigate();
-    const openMenu=(value)=>{
-        setMenu(!menu)
-    }
+    const location = useLocation();
+    const previous = useRef(null);
+    
     return(
         <>
         <section className="w-[1240px] mx-auto after:content-'' after:h-[1px] after:w-full after:bg-[#0000001a] after:table after:mt-6">
@@ -24,7 +23,7 @@ export default function Navbar(){
                     </div>
                     <div>
                         <ul className="flex flex-row capitalize">
-                            <li className="mr-6 relative group before:content-'' before:absolute before:w-full before:h-1 before:rounded-lg before:bg-rose-500 before:bottom-0 before:left-0 before:origin-right before:scale-x-0 before:transition before:duration-300 before:ease-in hover:before:origin-left hover:before:scale-x-100" onClick={openMenu}>
+                            <li className="mr-6 relative group before:content-'' before:absolute before:w-full before:h-1 before:rounded-lg before:bg-rose-500 before:bottom-0 before:left-0 before:origin-right before:scale-x-0 before:transition before:duration-300 before:ease-in hover:before:origin-left hover:before:scale-x-100">
                             <NavLink to="/shop" className="flex flex-row items-center">
                             shop <MdKeyboardArrowDown className="ml-1" />
                             </NavLink>
@@ -32,12 +31,12 @@ export default function Navbar(){
                                 <DropDown/>
                             </div>
                             </li>
-                            <a className="mr-6" href="#topSelling">
+                            <li className={`mr-6 hover:cursor-pointer relative before:content-'' before:absolute before:w-full before:h-1 before:rounded-lg before:bg-rose-500 before:bottom-0 before:left-0 ${location.pathname == "/onSale"?"":" before:origin-right before:scale-x-0 before:transition before:duration-300 before:ease-in hover:before:origin-left hover:before:scale-x-100"}`} onClick={()=>{navigate("/onSale",{state:["on sale"]})}}>
                             on sale
-                            </a>
-                            <a className="mr-6" href="#newArrivals">
+                            </li>
+                            <li className={`mr-6 hover:cursor-pointer relative before:content-'' before:absolute before:w-full before:h-1 before:rounded-lg before:bg-rose-500 before:bottom-0 before:left-0 ${location.pathname == "/newArrivals"?"":" before:origin-right before:scale-x-0 before:transition before:duration-300 before:ease-in hover:before:origin-left hover:before:scale-x-100"}`} onClick={()=>{navigate("/newArrivals",{state:["new arrivals"]})}}>
                             new arrivals
-                            </a>
+                            </li>
                             <a href="#brands">brands</a>
                         </ul>
                     </div>

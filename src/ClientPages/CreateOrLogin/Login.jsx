@@ -20,7 +20,7 @@ export default function Login({switchMode}){
                 <div className="w-full text-center">
                     <p className="text-[#333] text-base font-normal  leading-normal font-fontShare">
                         Don't have an account? 
-                        <span className="text-[#111] underline" onClick={modeSwitch}>Create a free account</span>
+                        <span className="text-[#111] underline hover:cursor-pointer" onClick={modeSwitch}>Create a free account</span>
                     </p>
                 </div>
                 

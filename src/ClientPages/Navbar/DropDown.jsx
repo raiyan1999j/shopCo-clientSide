@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
-export default function DropDown({menuCondition,menuOpen}){
+export default function DropDown(){
     const navigate = useNavigate();
     return(
         <>
@@ -11,8 +11,8 @@ export default function DropDown({menuCondition,menuOpen}){
                         men
                     </h2>
                     <ul className="mt-6">
-                        <li className="capitalize font-fontShare font-medium text-lg text-[#a09a9a] transition-all duration-200 ease-in hover:cursor-pointer hover:text-xl hover:font-bold" onClick={()=>{navigate("/details")
-                        menuOpen()
+                        <li className="capitalize font-fontShare font-medium text-lg text-[#a09a9a] transition-all duration-200 ease-in hover:cursor-pointer hover:text-xl hover:font-bold" onClick={()=>{
+                        navigate("/productCategory",{state:["men","t-shirts"]})
                         }}>
                             t-shirts
                         </li>

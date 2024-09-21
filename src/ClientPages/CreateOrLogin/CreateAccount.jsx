@@ -23,7 +23,7 @@ export default function CreateAccount({switchMode}){
                 <div className="w-full text-center">
                     <p className="text-[#333] text-base font-normal  leading-normal font-fontShare">
                         Already have an account? 
-                        <span className="text-[#111] underline" onClick={modeSwitch}>Log in</span>
+                        <span className="text-[#111] underline hover:cursor-pointer" onClick={modeSwitch}>Log in</span>
                     </p>
                 </div>
 

@@ -8,6 +8,7 @@ import Details from './ClientPages/Details/Details.jsx'
 import ProductCategory from './ClientPages/ProductCategory/ProductCategory.jsx';
 import Cart from './ClientPages/Cart/Cart.jsx'
 import CreateOrLogin from './ClientPages/CreateOrLogin/CreateOrLogin.jsx'
+import InfoProvider from './InfoProvider/InoProvider.jsx'
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,14 @@ const router = createBrowserRouter([
         element:<ProductCategory/>
       },
       {
+        path:"/onSale",
+        element:<ProductCategory/>
+      },
+      {
+        path:"/newArrivals",
+        element:<ProductCategory/>
+      },
+      {
         path:"/Cart",
         element:<Cart/>
       },
@@ -40,6 +49,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+  <InfoProvider>
     <RouterProvider router={router}/>
+  </InfoProvider>
   </StrictMode>,
 )

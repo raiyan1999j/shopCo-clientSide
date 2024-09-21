@@ -3,8 +3,10 @@ import New1 from "../../../../public/new1.png";
 import New2 from "../../../../public/new2.png";
 import New3 from "../../../../public/new3.png";
 import New4 from "../../../../public/new4.png"
+import { useNavigate } from "react-router-dom";
 
 export default function NewArrival() {
+  const navigate = useNavigate();
   return (
     <>
       <section className="w-full mx-auto mt-[72px]" id="newArrivals">
@@ -15,7 +17,7 @@ export default function NewArrival() {
         </div>
         <div className="w-[1240px] mx-auto">
           <div className="w-full grid grid-cols-[296px_296px_296px_296px] gap-x-[20px]">
-            <div>
+            <div onClick={()=>{navigate("/details",{state:["new arrivals","t-shirts"]})}}>
               <div className="w-full h-[298px] rounded-[20px]">
                 <img
                   src={New1}
@@ -140,7 +142,9 @@ export default function NewArrival() {
           </div>
         </div>
         <div className="w-[1240px] mx-auto flex flex-col items-center justify-center mt-[36px] after:content-'' after:w-full after:h-[1px] after:bg-[#0000001a] after:mt-[64px]">
-            <button className="text-black font-fontShare text-base font-medium capitalize h-[52px] w-[218px] flex justify-center items-center rounded-[62px] border border-[#0000001a] bg-[#0000001a]">
+            <button className="text-black font-fontShare text-base font-medium capitalize h-[52px] w-[218px] flex justify-center items-center rounded-[62px] border border-[#0000001a] bg-[#0000001a]" onClick={()=>{
+              navigate("/productCategory",{state:["new arrivals"]})
+            }}>
                 view all
             </button>
         </div>
