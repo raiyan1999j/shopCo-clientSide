@@ -7,9 +7,6 @@ import Sponser from "./Sponser/Sponser";
 import TopSelling from "./TopSelling/TopSelling";
 
 export default function Shop(){
-    const location = useLocation();
-
-    console.log(location)
     return(
         <>
             <Banner/>
