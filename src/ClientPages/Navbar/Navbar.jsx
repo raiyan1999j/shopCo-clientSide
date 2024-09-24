@@ -4,12 +4,14 @@ import Cart from "../../../public/cart.png";
 import Profile from "../../../public/profile.png"
 import { MdKeyboardArrowDown } from "react-icons/md";
 import DropDown from "./DropDown";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { BiExit } from "react-icons/bi";
+import { InfoContext } from "../../InfoProvider/InoProvider";
+import Spin from "../../Preloader/Spin";
 
 export default function Navbar(){
     const navigate = useNavigate();
-    const location = useLocation();
-    const previous = useRef(null);
+    const {user,logoutUser,loading} = useContext(InfoContext)
     
     return(
         <>
@@ -58,16 +60,32 @@ export default function Navbar(){
                             <img src={Cart} alt="cart" />
                          </div>
                         </span>
-                        <span className="hover:cursor-pointer">
+                        <span className="hover:cursor-pointer relative group">
                         <div onClick={()=>{navigate("/createOrLogin")}}>
                             <img src={Profile} alt="profile" />
                         </div>
+                        {
+                            user?
+                            <div className="absolute rounded-lg opacity-0 transition-all duration-300 ease-in group-hover:opacity-100">
+                            <button className="text-black capitalize font-fontShare font-medium text-sm flex flex-row items-center h-10 px-2 shadow-sm shadow-black rounded-lg hover:shadow-inner hover:shadow-black" onClick={()=>{logoutUser()}}>
+                                logout
+                                <BiExit />
+                            </button>
+                        </div>:""
+                        }
+                        
                         </span>
                     </div>
                 </div>
             </nav>
         </section>
-        {/* <DropDown menuCondition={menu} menuOpen={()=>{openMenu()}}/> */}
+
+        {
+            loading?
+            <div className="fixed top-0 left-0 h-screen w-full bg-white/50 flex justify-center items-center">
+            <Spin/>
+        </div>:""
+        }
         </>
     )
 }

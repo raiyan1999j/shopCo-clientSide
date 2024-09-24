@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Facebook from "../../../public/facebook.png";
 import Google from "../../../public/google.png";
 import { useFormik } from "formik";
@@ -94,7 +94,7 @@ export default function CreateAccount({switchMode}){
                             Create a password
                             </label>
                         </div>
-                        <div className="flex flex-row items-center" onClick={()=>{setTxtPass(!txtOrPass)}}>
+                        <div className="flex flex-row items-center hover:cursor-pointer" onClick={()=>{setTxtPass(!txtOrPass)}}>
                             <span className="mr-2">
                             {
                                 txtOrPass?<RxEyeOpen className="text-[#666] font-normal"/>:<PiEyeClosedBold className="text-[#666] font-normal"/>
@@ -120,7 +120,7 @@ export default function CreateAccount({switchMode}){
                 </div>
 
                 <div className="mt-2">
-                    <button className="w-full h-[64px] rounded-[40px] text-white text-[22px] font-medium font-fontShare leading-normal bg-[#111]/25 flex justify-center items-center" type="submit">
+                    <button className="w-full h-[64px] rounded-[40px] text-white text-[22px] font-medium font-fontShare leading-normal bg-[#111]/25 flex justify-center items-center transition-all ease-in duration-150 hover:bg-[#111]" type="submit">
                         Create an account
                     </button>
                 </div>
@@ -130,7 +130,7 @@ export default function CreateAccount({switchMode}){
                     <p className="text-[#666] text-xl font-normal leading-normal">OR Continue with</p>
                     <div className="flex flex-row gap-x-4 mt-4">
                         <div>
-                            <button className="w-[277px] h-[64px] border border-[#333] rounded-[40px] flex flex-row items-center justify-center text-[#333] text-[22px] font-normal font-fontShare" onClick={()=>{facebookUser()}}>
+                            <button className="w-[277px] h-[64px] border border-[#333] rounded-[40px] flex flex-row items-center justify-center text-[#333] text-[22px] font-normal font-fontShare transition-all duration-100 ease-in hover:bg-[#111] hover:text-white" onClick={()=>{facebookUser()}}>
                                 <span className="h-8 w-8 mr-4">
                                     <img src={Facebook} alt="facebook" className="h-full w-full object-cover" />
                                 </span>
@@ -138,7 +138,7 @@ export default function CreateAccount({switchMode}){
                             </button>
                         </div>
                         <div>
-                        <button className="w-[277px] h-[64px] border border-[#333] rounded-[40px] flex flex-row items-center justify-center text-[#333] text-[22px] font-normal font-fontShare" onClick={()=>{googleUser()}}>
+                        <button className="w-[277px] h-[64px] border border-[#333] rounded-[40px] flex flex-row items-center justify-center text-[#333] text-[22px] font-normal font-fontShare transition-all duration-100 ease-in hover:bg-[#111] hover:text-white" onClick={()=>{googleUser()}}>
                                 <span className="h-8 w-8 mr-4">
                                     <img src={Google} alt="Google" className="h-full w-full object-cover" />
                                 </span>
@@ -149,6 +149,8 @@ export default function CreateAccount({switchMode}){
                 </div>
             </div>
         </section>
+
+        
         </>
     )
 }

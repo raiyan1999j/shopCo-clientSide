@@ -16,6 +16,12 @@ export default {
         "formal":"url(./public/formal.png)",
         "party":"url(./public/party.png)",
         "gym":"url(./public/gym.png)"
+      },
+      animation:{
+        'spin-one':'spin 15s linear infinite',
+        'spin-two':'spin 5s linear infinite alternate-reverse',
+        'spin-three':'spin 15s linear infinite reverse',
+        'spin-four':'spin 5s linear infinite alternate-reverse'
       }
     },
   },
