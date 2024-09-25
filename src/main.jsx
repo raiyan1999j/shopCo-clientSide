@@ -9,7 +9,10 @@ import ProductCategory from './ClientPages/ProductCategory/ProductCategory.jsx';
 import Cart from './ClientPages/Cart/Cart.jsx'
 import CreateOrLogin from './ClientPages/CreateOrLogin/CreateOrLogin.jsx'
 import InfoProvider from './InfoProvider/InoProvider.jsx'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Dashboard from './Dashboard/Dashboard.jsx'
 
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path:"/",
@@ -44,13 +47,19 @@ const router = createBrowserRouter([
         element:<CreateOrLogin/>
       }
     ]
+  },
+  {
+    path:'/dashboard',
+    element:<Dashboard/>
   }
 ])
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+  <QueryClientProvider client={queryClient}>
   <InfoProvider>
     <RouterProvider router={router}/>
   </InfoProvider>
+  </QueryClientProvider>
   </StrictMode>,
 )

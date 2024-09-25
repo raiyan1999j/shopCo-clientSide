@@ -2,17 +2,28 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Search from "../../../public/search.png";
 import Cart from "../../../public/cart.png";
 import Profile from "../../../public/profile.png"
-import { MdKeyboardArrowDown } from "react-icons/md";
+import { MdKeyboardArrowDown, MdOutlineAdminPanelSettings } from "react-icons/md";
 import DropDown from "./DropDown";
 import { useContext, useEffect, useRef, useState } from "react";
 import { BiExit } from "react-icons/bi";
 import { InfoContext } from "../../InfoProvider/InoProvider";
 import Spin from "../../Preloader/Spin";
+import { useQuery } from "@tanstack/react-query";
+import { publicRoute } from "../../AxiosBase/PublicRoute";
+import Loading from "../../Preloader/Loading";
 
 export default function Navbar(){
     const navigate = useNavigate();
-    const {user,logoutUser,loading} = useContext(InfoContext)
-    
+    const {user,logoutUser,loading} = useContext(InfoContext);
+    const {isPending,isError,data} = useQuery({
+        queryKey:["userInfo"],
+        queryFn:()=>{
+            return publicRoute(`/userInfo?email=${user.email}`)
+            .then(result=>result.data.type)
+        }
+    })
+
+    console.log(isPending)
     return(
         <>
         <section className="w-[1240px] mx-auto after:content-'' after:h-[1px] after:w-full after:bg-[#0000001a] after:table after:mt-6">
@@ -66,7 +77,19 @@ export default function Navbar(){
                         </div>
                         {
                             user?
-                            <div className="absolute rounded-lg opacity-0 transition-all duration-300 ease-in group-hover:opacity-100">
+                            <div className="absolute rounded-lg opacity-0 transition-all duration-300 ease-in group-hover:opacity-100 left-[-20px]">
+                            
+                            {
+                                isPending?
+                                <Loading/>:
+                                isError?
+                                <p className="text-rose-500 font-fontShare font-bold text-sm">Please reload to fetch data</p>:
+                                data != "user"?
+                                <button className="text-black capitalize font-fontShare font-medium text-sm flex flex-row items-center h-10 px-2 shadow-sm shadow-black rounded-lg hover:shadow-inner hover:shadow-gray-500 mb-3" onClick={()=>{navigate('/dashboard')}}>
+                                {data}
+                                <MdOutlineAdminPanelSettings />
+                            </button>:""
+                            }
                             <button className="text-black capitalize font-fontShare font-medium text-sm flex flex-row items-center h-10 px-2 shadow-sm shadow-black rounded-lg hover:shadow-inner hover:shadow-black" onClick={()=>{logoutUser()}}>
                                 logout
                                 <BiExit />

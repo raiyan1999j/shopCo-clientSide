@@ -149,8 +149,6 @@ export default function CreateAccount({switchMode}){
                 </div>
             </div>
         </section>
-
-        
         </>
     )
 }
