@@ -12,6 +12,7 @@ import InfoProvider from './InfoProvider/InoProvider.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Dashboard from './Dashboard/Dashboard.jsx'
 import AllProducts from './Dashboard/AllProducts/AllProducts.jsx'
+import AddProducts from './Dashboard/AddProducts/AddProducts.jsx'
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
       {
         path:'/dashboard/allProducts',
         element:<AllProducts/>
+      },
+      {
+        path:'/dashboard/addProducts',
+        element:<AddProducts/>
       }
     ]
   }
