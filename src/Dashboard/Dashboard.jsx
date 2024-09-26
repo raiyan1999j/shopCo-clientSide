@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar/Navbar";
 
 export default function Dashboard(){
@@ -8,7 +9,7 @@ export default function Dashboard(){
             </header>
 
             <main>
-
+                <Outlet/>
             </main>
             <footer>
 

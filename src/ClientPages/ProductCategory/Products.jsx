@@ -13,7 +13,7 @@ export default function Products({ pathHistory,currentPath }) {
               <MdOutlineKeyboardArrowRight className="inline" />
             </span>
           </p>
-          {pathHistory.map((value, index) => {
+          {pathHistory?.map((value, index) => {
             return (
               <p
                 className="text-[#00000099] capitalize font-fontShare text-base font-normal leading-normal"

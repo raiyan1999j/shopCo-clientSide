@@ -5,7 +5,7 @@ import { IoSearchSharp } from 'react-icons/io5';
 export default function Topbar(){
     return(
         <>
-            <div className="w-[1180px] h-24 flex justify-end items-center border border-[#23232133] border-t-transparent border-r-transparent border-l-transparent">
+            <div className="w-[1180px] h-24 flex justify-end items-center border border-[#23232133] border-t-transparent border-r-transparent border-l-transparent float-right">
                 <div className='mr-10 hover:cursor-pointer'>
                     <span>
                     <IoSearchSharp />

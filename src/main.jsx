@@ -11,6 +11,7 @@ import CreateOrLogin from './ClientPages/CreateOrLogin/CreateOrLogin.jsx'
 import InfoProvider from './InfoProvider/InoProvider.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import Dashboard from './Dashboard/Dashboard.jsx'
+import AllProducts from './Dashboard/AllProducts/AllProducts.jsx'
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -50,7 +51,13 @@ const router = createBrowserRouter([
   },
   {
     path:'/dashboard',
-    element:<Dashboard/>
+    element:<Dashboard/>,
+    children:[
+      {
+        path:'/dashboard/allProducts',
+        element:<AllProducts/>
+      }
+    ]
   }
 ])
 

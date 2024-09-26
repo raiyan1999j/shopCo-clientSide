@@ -4,7 +4,7 @@ import Topbar from "./Topbar";
 export default function Navbar() {
   return (
     <>
-      <section className="w-full flex flex-row">
+      <section className="w-full">
         <Sidebar />
         <Topbar />
       </section>
