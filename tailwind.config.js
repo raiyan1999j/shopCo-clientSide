@@ -27,6 +27,20 @@ export default {
         'bounce-one':'bounce 0.5s infinite',
         'bounce-two':'bounce 0.5s infinite 0.1s',
         'bounce-three':'bounce 0.5s infinite 0.2s'
+      },
+      keyframes:{
+        FadeIn:{
+          "0%":{opacity: 0},
+          "100":{opacity:100}
+        },
+        FlipOut:{
+          "0%":{transform:'perspective(400px) rotateX(0deg)',opacity:'1'},
+          "100%":{transform:'perspective(400px) rotateX(90deg)',opacity:'0'}
+        }
+      },
+      animation:{
+        FadeIn: "FadeIn 0.3s ease-in-out",
+        FlipOut:"FlipOut 0.3s ease-in-out forwards"
       }
     },
   },
