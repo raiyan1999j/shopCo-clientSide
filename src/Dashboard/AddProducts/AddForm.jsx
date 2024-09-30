@@ -27,7 +27,7 @@ export default function AddForm(){
         description:"",
         category:"",
         brandName:"",
-        sku:`place product name-${uniqueValue}`,
+        sku:`place product name_${uniqueValue}`,
         stock:"",
         regularPrice:"",
         salePrice:"",
