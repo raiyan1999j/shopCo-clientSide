@@ -2,10 +2,21 @@ import { CiCirclePlus } from "react-icons/ci";
 import { LuPlusCircle } from "react-icons/lu";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import AvailableProducts from "./AvailableProducts";
+import { useQuery } from "@tanstack/react-query";
+import { publicRoute } from "../../AxiosBase/PublicRoute";
+import Spin from "../../Preloader/Spin";
 
 export default function AllProducts(){
     const navigate = useNavigate();
 
+    const {isPending,isError,data} = useQuery({
+        queryKey:["allProductsInfo"],
+        queryFn:()=>{
+            return publicRoute("/allProductsInfo")
+            .then(res=>res.data)
+        }
+    })
     return(
         <>
             <section className="w-full">
@@ -36,6 +47,21 @@ export default function AllProducts(){
                         </div>
                     </div>
                 </div>
+                
+                {
+                    isPending?
+                    <div className="h-full w-full flex justify-center items-center">
+                        <Spin/>
+                    </div>:
+                    isError?
+                    <div className="flex h-full w-full justify-center items-center">
+                        <p className="text-rose-500 font-fontShare font-bold text-sm">
+                        Please reload to fetch data
+                        </p>
+                    </div>:
+                    <AvailableProducts allInfo={data}/>
+                }
+                
             </section>
         </>
     )

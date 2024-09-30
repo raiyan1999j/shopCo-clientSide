@@ -1,6 +1,5 @@
 
-export default function Loading({height,width}){
-    console.log(height,width)
+export default function Loading({size}){
     return(
         <>
             <div className=" flex flex-row gap-x-2">

@@ -22,8 +22,6 @@ export default function Navbar(){
             .then(result=>result.data.type)
         }
     })
-
-    console.log(isPending)
     return(
         <>
         <section className="w-[1240px] mx-auto after:content-'' after:h-[1px] after:w-full after:bg-[#0000001a] after:table after:mt-6">
