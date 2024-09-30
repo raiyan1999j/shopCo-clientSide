@@ -10,7 +10,7 @@ import {
   uploadBytes,
 } from "firebase/storage";
 
-export default function RightSide({ setFieldValue }) {
+export default function RightSide({ setFieldValue,conditionLoading }) {
   const [selectedImg, setSelection] = useState();
   const [imageContainer, setImgContainer] = useState([]);
   const [imageObj, setImageObj] = useState([]);
@@ -20,10 +20,8 @@ export default function RightSide({ setFieldValue }) {
 
   const handleImage = (event) => {
     const copy = [...imageObj];
-    const containerCopy = [...imageContainer];
     const nameOfImage = event.target.files[0].name;
     const file = event.target.files[0];
-    const storage = getStorage();
     const codeLen = 5;
     const character =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#";
@@ -85,6 +83,10 @@ export default function RightSide({ setFieldValue }) {
     uploadToFirebase();
     setFieldValue("image", imageContainer);
   }, [imageObj]);
+
+  useEffect(()=>{
+    setImageObj([]);
+  },[conditionLoading])
   return (
     <>
       <div className="w-[457px]">

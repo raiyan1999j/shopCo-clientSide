@@ -5,12 +5,20 @@ import { Formik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { publicRoute } from "../../AxiosBase/PublicRoute";
 import { useEffect, useState } from "react";
+import Spin from "../../Preloader/Spin";
+import Loading from "../../Preloader/Loading";
 
 export default function AddForm(){
     const [uniqueValue,setUnique] = useState();
+    const [loadingCondition,setLoadingCondition] = useState(false);
     const productData = useMutation({
         mutationFn:(value)=>{
             return publicRoute.post(`/addNewProduct?title=${value.title}&&subTitle=${value.subTitle}`,value.obj)
+            .then((response)=>{
+                if(response.status === 200){
+                    setLoadingCondition(false)
+                }
+            })
         }
     })
 
@@ -39,6 +47,7 @@ export default function AddForm(){
 
         const wrap = {...copy,discount:`${finalDiscount}%`}
 
+        setLoadingCondition(true)
         productData.mutate({title:value.tag,subTitle:value.sku,obj:wrap});
     }
 
@@ -58,10 +67,17 @@ export default function AddForm(){
         }
 
         createCode();
-    },[])
+    },[loadingCondition])
     return(
         <>
-            <section className="w-ful">
+            <section className="w-full">
+            {
+                loadingCondition?<div className=" h-screen w-screen fixed top-[96px] left-[260px]">
+                <span className="fixed h-screen w-screen top-1/2 left-1/2 ">
+                <Spin size={200}/>
+                </span> 
+                </div>:""
+            }
                 <div className="w-[1108px] mx-auto my-6">
                     <h2 className="text-black text-2xl font-semibold font-rubik leading-normal capitalize">
                         Product Details
@@ -88,17 +104,17 @@ export default function AddForm(){
                 </div>
 
                 <div className="w-[1108px] mx-auto bg-white rounded-2xl">
-                <Formik enableReinitialize initialValues={primaryValue} onSubmit={(value)=>{finalValue(value)}}>
+                <Formik enableReinitialize initialValues={primaryValue} onSubmit={(value, {resetForm})=>{
+                finalValue(value)
+                resetForm()
+                }}>
                 {({setFieldValue})=>(
                     <div className="flex flex-row w-full px-6 py-6">
                         <LeftSide/>
-                        <RightSide setFieldValue={setFieldValue}/>
+                        <RightSide 
+                        conditionLoading={loadingCondition} setFieldValue={setFieldValue}/>
                     </div>
                 )}
-                {/* <div className="flex flex-row w-full px-6 py-6">
-                        <LeftSide/>
-                        <RightSide/>
-                    </div> */}
                 </Formik>
                 </div>
             </section>
