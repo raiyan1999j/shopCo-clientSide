@@ -97,8 +97,8 @@ export default function AddForm(){
                         <MdOutlineKeyboardArrowRight className="text-black text-base"/>
                         </span>
 
-                        <h4>
-                            Product details
+                        <h4  className="font-sans text-black text-base font-semibold leading-normal capitalize">
+                           Add Products
                         </h4>
                     </div>
                 </div>

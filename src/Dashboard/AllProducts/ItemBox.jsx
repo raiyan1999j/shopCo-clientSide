@@ -3,8 +3,10 @@ import { FaArrowUpLong, FaBangladeshiTakaSign } from "react-icons/fa6";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../Preloader/Loading";
+import { useNavigate } from "react-router-dom";
 
-export default function ItemBox({ data }) {
+export default function ItemBox({ data,track, subTitle, title }) {
+  const navigate = useNavigate();
   const {isPending,isError,data:image} = useQuery({
     queryKey:['firebaseImag',data.image[0]],
     queryFn:()=>{
@@ -14,6 +16,10 @@ export default function ItemBox({ data }) {
         return getDownloadURL(imageRef).then(url=>url)
     }
   })
+
+  const editData=()=>{
+    navigate('/dashboard/editForm',{state:{track,title,subTitle:subTitle[0]}})
+  }
   return (
     <>
       <div className="w-full bg-white rounded-2xl p-4">
@@ -49,7 +55,7 @@ export default function ItemBox({ data }) {
             </div>
           </div>
           <div>
-            <button className="h-8 w-[27.2px] bg-[#2323210d] flex justify-center items-center rounded-[4px]">
+            <button className="h-8 w-[27.2px] bg-[#2323210d] flex justify-center items-center rounded-[4px]" onClick={()=>{editData()}}>
               <CiMenuKebab className="text-base text-gray-500/50 rotate-[90deg]" />
             </button>
           </div>
