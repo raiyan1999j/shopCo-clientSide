@@ -85,6 +85,7 @@ export default function RightSide({ setFieldValue,conditionLoading }) {
   }, [imageObj]);
 
   useEffect(()=>{
+    setImgContainer([]);
     setImageObj([]);
   },[conditionLoading])
   return (
