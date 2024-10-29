@@ -1,19 +1,21 @@
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import LeftSide from "./LeftSide";
 import RightSide from "./RightSide";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { publicRoute } from "../../AxiosBase/PublicRoute";
 import { useEffect, useState } from "react";
 import Spin from "../../Preloader/Spin";
 import Loading from "../../Preloader/Loading";
+import LeftSideForm from "../ProductConfig/LeftSideForm";
+import RightSideForm from "../ProductConfig/RightSideForm";
 
 export default function AddForm(){
     const [uniqueValue,setUnique] = useState();
     const [loadingCondition,setLoadingCondition] = useState(false);
     const productData = useMutation({
         mutationFn:(value)=>{
-            return publicRoute.post(`/addNewProduct?title=${value.title}&&subTitle=${value.subTitle}`,value.obj)
+            return publicRoute.post(`/addNewProduct?title=${value.title}`,value.obj)
             .then((response)=>{
                 if(response.status === 200){
                     setLoadingCondition(false)
@@ -37,7 +39,7 @@ export default function AddForm(){
     const finalValue=(value)=>{
         const copy = {...value};
         delete copy.tag;
-        delete copy.sku;
+        // delete copy.sku;
 
         const difference = parseInt(value.regularPrice) - parseInt(value.salePrice);
 
@@ -48,7 +50,8 @@ export default function AddForm(){
         const wrap = {...copy,discount:`${finalDiscount}%`}
 
         setLoadingCondition(true)
-        productData.mutate({title:value.tag,subTitle:value.sku,obj:wrap});
+        
+        productData.mutate({title:value.tag,obj:wrap})
     }
 
     useEffect(()=>{
@@ -103,7 +106,7 @@ export default function AddForm(){
                     </div>
                 </div>
 
-                <div className="w-[1108px] mx-auto bg-white rounded-2xl">
+                {/* <div className="w-[1108px] mx-auto bg-white rounded-2xl">
                 <Formik enableReinitialize initialValues={primaryValue} onSubmit={(value, {resetForm})=>{
                 finalValue(value)
                 resetForm()
@@ -115,6 +118,19 @@ export default function AddForm(){
                         conditionLoading={loadingCondition} setFieldValue={setFieldValue}/>
                     </div>
                 )}
+                </Formik>
+                </div> */}
+
+                <div className="w-[1108px] mx-auto bg-white rounded-2xl">
+                <Formik enableReinitialize initialValues={primaryValue} onSubmit={(value, {resetForm})=>{
+                finalValue(value)
+                resetForm()
+                }}>
+                    <div className="flex flex-row w-full px-6 py-6">
+                        <LeftSideForm/>
+                        <RightSideForm 
+                        conditionLoading={loadingCondition}/>
+                    </div>
                 </Formik>
                 </div>
             </section>

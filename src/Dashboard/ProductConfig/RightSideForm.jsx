@@ -1,4 +1,4 @@
-import { useField, useFormikContext } from "formik";
+import { useFormikContext } from "formik";
 import { useEffect, useState } from "react";
 import { HiOutlinePhoto } from "react-icons/hi2";
 import { ImCross } from "react-icons/im";
@@ -9,19 +9,19 @@ import {
   ref,
   uploadBytes,
 } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
-export default function RightSide({ setFieldValue,conditionLoading,inputChange }) {
+export default function RightSideForm({conditionLoading,inputChange,itemsRemove }) {
   const [selectedImg, setSelection] = useState();
   const [imageContainer, setImgContainer] = useState([]);
   const [imageObj, setImageObj] = useState([]);
-  const [preloadImage,setPreloadImag] = useState([]);
   const [animateCondition, setAnimate] = useState();
-  const [image] = useField("image");
-  const { submitForm } = useFormikContext();
+  const {setFieldValue,submitForm,values} = useFormikContext();
+  const navigate = useNavigate();
 
   const handleImage = (event) => {
     const copy = [...imageObj];
-    const nameOfImage = event.target.files[0].name;
+    const nameOfImage = event?.target?.files[0]?.name;
     const file = event.target.files[0];
     const codeLen = 5;
     const character =
@@ -84,7 +84,7 @@ export default function RightSide({ setFieldValue,conditionLoading,inputChange }
       });
     }
     uploadToFirebase();
-    setFieldValue("image", imageContainer);
+    setFieldValue("image",imageContainer)
   }, [imageContainer]);
 
   useEffect(()=>{
@@ -93,8 +93,9 @@ export default function RightSide({ setFieldValue,conditionLoading,inputChange }
   },[conditionLoading]);
 
   useEffect(()=>{
-    if(image){
-      const array = image.value;
+    if(values.image){
+      // const array = values.image.value;
+      const array = values.image;
       const storage = getStorage();
       let collectUrl=[];
       
@@ -109,8 +110,10 @@ export default function RightSide({ setFieldValue,conditionLoading,inputChange }
           for(let repeat=0; repeat<arr.length; repeat++){
             let wrap = {
               imageUrl : arr[repeat],
-              imageName: image.value[repeat],
-              firebaseImgName: image.value[repeat]
+              // imageName: image.value[repeat],
+              imageName: values.image[repeat],
+              // firebaseImgName: image.value[repeat]
+              firebaseImgName : values.image[repeat]
             }
             support.push(wrap)
             imageCodeContainer.push(wrap.firebaseImgName);
@@ -217,40 +220,44 @@ export default function RightSide({ setFieldValue,conditionLoading,inputChange }
           );
         })}
         <div className="flex flex-row w-full mt-10">
-          <div className="w-[220.5px] mr-4">
-          {
-            inputChange?
-            <button
-              className="h-12 w-full border border-[#232321] rounded-lg bg-white text-[#232321] text-sm font-medium font-rubik tracking-tight uppercase leading-normal transition-all duration-150 ease-in hover:text-white hover:bg-[#003F62]"
-              onClick={() => {
-                submitForm();
-              }}
+          <div className="w-[220.5px] mr-4">      
+              {
+                inputChange?
+                <button
+              className="h-12 w-full border border-[#232321] rounded-lg bg-white text-[#232321] text-sm font-medium font-rubik tracking-tight uppercase leading-normal transition-all duration-150 ease-in hover:text-white hover:bg-[#003F62] hover:border-[#003F62]"
+              type="submit"
+               onClick={submitForm}
             >
               Update
             </button>:
             <button
-              className="h-12 w-full border border-[#232321] rounded-lg bg-white text-[#232321] text-sm font-medium font-rubik tracking-tight uppercase leading-normal transition-all duration-150 ease-in hover:text-white hover:bg-[#003F62]"
-              onClick={() => {
-                submitForm();
-              }}
+              className="h-12 w-full border border-[#232321] rounded-lg bg-white text-[#232321] text-sm font-medium font-rubik tracking-tight uppercase leading-normal transition-all duration-150 ease-in hover:text-white hover:bg-[#003F62] hover:border-[#003F62]"
+              type="submit"
+               onClick={submitForm}
             >
               Add
             </button>
-          }
+              }
           </div>
 
           <div className="w-[220.5px]">
-            {
-              inputChange?
-              <button className=" h-12 w-full border border-[#232321] rounded-lg text-[#232321] text-sm font-medium font-rubik tracking-tighter uppercase leading-normal transition-all duration-150 ease-in hover:text-white hover:bg-[#003F62]">
-              delete
-            </button>:
-            <button className=" h-12 w-full border border-[#232321] rounded-lg text-[#232321] text-sm font-medium font-rubik tracking-tighter uppercase leading-normal transition-all duration-150 ease-in hover:text-white hover:bg-[#003F62]">
+            
+            <button className=" h-12 w-full border border-[#232321] rounded-lg text-[#232321] text-sm font-medium font-rubik tracking-tighter uppercase leading-normal transition-all duration-150 ease-in hover:text-white hover:bg-[#003F62] hover:border-[#003F62]" onClick={()=>{navigate(-1)}}>
               cancel
             </button>
-            }
+            
           </div>
         </div>
+        {
+          inputChange?
+          <div className="flex flex-row w-full mt-4">
+            <div className="w-[220.5px]">
+            <button className=" h-12 w-full border border-[#232321] rounded-lg text-[#232321] text-sm font-medium font-rubik tracking-tighter uppercase leading-normal transition-all duration-150 ease-in hover:text-white hover:bg-rose-900 hover:border-rose-900" onClick={()=>{itemsRemove()}}>
+              Remove
+            </button>
+            </div>
+          </div>:""
+        }
       </div>
     </>
   );

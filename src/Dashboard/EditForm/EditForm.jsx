@@ -3,36 +3,67 @@ import { useLocation } from "react-router-dom"
 import LeftSide from "../AddProducts/LeftSide";
 import RightSide from "../AddProducts/RightSide";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { publicRoute } from "../../AxiosBase/PublicRoute";
+import Spin from "../../Preloader/Spin";
+import { useEffect, useState } from "react";
+import LeftSideForm from "../ProductConfig/LeftSideForm";
+import RightSideForm from "../ProductConfig/RightSideForm";
 
 export default function EditForm(){
-    const location = useLocation();
+    const {state} = useLocation();
 
-    const primaryValue={
-        productName:"productName",
-        description:"description",
-        category:"category",
-        brandName:"brandName",
-        sku:`place product`,
-        stock:"stock",
-        regularPrice:"price",
-        salePrice:"price",
-        tag:"tag",
-        image:[]
-    }
+    const {isPending,isError,data} = useQuery({
+        queryKey:['specificProduct'],
+        queryFn:()=>{
+            return publicRoute(`/specificProduct?trackId=${state?.track}&&title=${state?.title}&&sku=${state.sku}`)
+            .then(res=>res.data[0])
+        }
+    })
+    
+    const updateValue = useMutation({
+        mutationFn:(value)=>{
+            return publicRoute.put(`/updateProductsInfo?title=${value.title}&&sku=${value.sku}&&trackId=${state.track}`,value.obj)
+        }
+    })
+
+    const removeDocs= useMutation({
+        mutationFn:(value)=>{
+            return publicRoute.delete(`/removeProductsInfo?title=${value.title}&&trackId=${value.trackId}&&sku=${value.sku}`)
+        }
+    })
 
     const finalValue=(value)=>{
-        console.log(value)
+        const copy ={...value};
+        delete copy.tag;
+
+        updateValue.mutate({title:value.tag,sku:value.sku,obj:copy})
+    }
+
+    const removeItems=(value)=>{
+        const wrap = {
+            trackId : state.track,
+            title: state.title,
+            sku: state.sku
+        }
+
+        removeDocs.mutate(wrap)
+    }
+    const primaryValue={
+        productName:data?.productName,
+        description:data?.description,
+        category:data?.category,
+        brandName:data?.brandName,
+        sku:data?.sku,
+        stock:data?.stock,
+        regularPrice:data?.regularPrice,
+        salePrice:data?.salePrice,
+        tag:state.title,
+        image:data?.image
     }
     return(
         <>
         <section className="w-full">
-            {/* {
-                loadingCondition?<div className=" h-screen w-screen fixed top-[96px] left-[260px]">
-                <span className="fixed h-screen w-screen top-1/2 left-1/2 ">
-                <Spin size={200}/>
-                </span> 
-                </div>:""
-            } */}
                 <div className="w-[1108px] mx-auto my-6">
                     <h2 className="text-black text-2xl font-semibold font-rubik leading-normal capitalize">
                         Product Details
@@ -59,18 +90,29 @@ export default function EditForm(){
                 </div>
 
                 <div className="w-[1108px] mx-auto bg-white rounded-2xl">
-                <Formik enableReinitialize initialValues={primaryValue} onSubmit={(value, {resetForm})=>{
+                {
+                    isPending?
+                    <div className="flex justify-center items-center h-screen w-full">
+                        <Spin/>
+                    </div>:
+                    isError?
+                    <div>
+                        <p>
+                            something went wrong
+                        </p>
+                    </div>:
+                    <Formik enableReinitialize initialValues={primaryValue} onSubmit={(value)=>{
                 finalValue(value)
-                resetForm()
                 }}>
-                {({setFieldValue})=>(
                     <div className="flex flex-row w-full px-6 py-6">
-                        <LeftSide/>
-                        <RightSide 
-                         setFieldValue={setFieldValue}/>
+                        <LeftSideForm inputChange={true}/>
+                        <RightSideForm 
+                         inputChange={true}
+                         itemsRemove={(value)=>{removeItems(value)}}
+                         />
                     </div>
-                )}
                 </Formik>
+                }
                 </div>
             </section>
         </>

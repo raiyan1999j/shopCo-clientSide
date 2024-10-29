@@ -8,17 +8,15 @@ export default function AvailableProducts({allInfo}){
             {
                 allInfo.map((items)=>{
                     const title = Object.keys(items)[1];
-                    
+                
                     return items[`${title}`].map((value,index)=>{
-                        const keyOfObj = Object.keys(value);
-                        const data = value[`${keyOfObj}`];
-
-                        return <ItemBox 
-                        data={data} 
-                        track={items._id}
-                        title={title} 
-                        subTitle={keyOfObj} 
-                        key={index}/>
+                        return <ItemBox
+                            key={index}
+                            title={title}
+                            track={items._id} 
+                            data={value}
+                            sku={value.sku}
+                        />
                     })
                 })
             }
