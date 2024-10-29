@@ -9,16 +9,23 @@ import Spin from "../../Preloader/Spin";
 import Loading from "../../Preloader/Loading";
 import LeftSideForm from "../ProductConfig/LeftSideForm";
 import RightSideForm from "../ProductConfig/RightSideForm";
+import ModalBox from "../../ModalBox/ModalBox";
 
 export default function AddForm(){
     const [uniqueValue,setUnique] = useState();
     const [loadingCondition,setLoadingCondition] = useState(false);
+    const [modalCall,setModalCall] = useState();
     const productData = useMutation({
         mutationFn:(value)=>{
             return publicRoute.post(`/addNewProduct?title=${value.title}`,value.obj)
             .then((response)=>{
                 if(response.status === 200){
-                    setLoadingCondition(false)
+                    setModalCall({activity:"addItem",message:"your new product has been added",clearTimer:2500});
+                    
+                    setTimeout(()=>{
+                        setModalCall();
+                        setLoadingCondition(false)
+                    },2500)
                 }
             })
         }
@@ -134,6 +141,7 @@ export default function AddForm(){
                 </Formik>
                 </div>
             </section>
+            <ModalBox modalInfo={modalCall}/>
         </>
     )
 }

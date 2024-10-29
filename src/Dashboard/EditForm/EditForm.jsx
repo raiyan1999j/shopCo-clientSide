@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import LeftSide from "../AddProducts/LeftSide";
 import RightSide from "../AddProducts/RightSide";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
@@ -9,9 +9,12 @@ import Spin from "../../Preloader/Spin";
 import { useEffect, useState } from "react";
 import LeftSideForm from "../ProductConfig/LeftSideForm";
 import RightSideForm from "../ProductConfig/RightSideForm";
+import ModalBox from "../../ModalBox/ModalBox";
 
 export default function EditForm(){
     const {state} = useLocation();
+    const navigate = useNavigate();
+    const [modalCall,setModalCall] = useState();
 
     const {isPending,isError,data} = useQuery({
         queryKey:['specificProduct'],
@@ -23,7 +26,16 @@ export default function EditForm(){
     
     const updateValue = useMutation({
         mutationFn:(value)=>{
-            return publicRoute.put(`/updateProductsInfo?title=${value.title}&&sku=${value.sku}&&trackId=${state.track}`,value.obj)
+            return publicRoute.put(`/updateProductsInfo?title=${value.title}&&sku=${value.sku}&&trackId=${state.track}`,value.obj).then((res)=>{
+                if(res.status == 200){
+                    setModalCall({activity:"updateItem",message:"Your product has updated",clearTimer:2000})
+
+                    setTimeout(()=>{
+                        setModalCall();
+                        navigate("/dashboard/allProducts")
+                    },2000)
+                }
+            })
         }
     })
 
@@ -115,6 +127,7 @@ export default function EditForm(){
                 }
                 </div>
             </section>
+            <ModalBox modalInfo={modalCall}/>
         </>
     )
 }

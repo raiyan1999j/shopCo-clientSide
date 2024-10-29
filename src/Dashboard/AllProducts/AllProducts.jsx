@@ -6,6 +6,7 @@ import AvailableProducts from "./AvailableProducts";
 import { useQuery } from "@tanstack/react-query";
 import { publicRoute } from "../../AxiosBase/PublicRoute";
 import Spin from "../../Preloader/Spin";
+import { useEffect } from "react";
 
 export default function AllProducts(){
     const navigate = useNavigate();

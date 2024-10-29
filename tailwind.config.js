@@ -27,6 +27,11 @@ export default {
         FlipOut:{
           "0%":{transform:'perspective(400px) rotateX(0deg)',opacity:'1'},
           "100%":{transform:'perspective(400px) rotateX(90deg)',opacity:'0'}
+        },
+        SlideOutRight:{
+          "0%":{transform: "translateX(17.5%)"},
+          "50%":{transform: "translateX(5%)"},
+          "100%":{transform: "translateX(100%)"}
         }
       },
       animation:{
@@ -38,7 +43,8 @@ export default {
         'bounce-two':'bounce 0.5s infinite 0.1s',
         'bounce-three':'bounce 0.5s infinite 0.2s',
         'FadeIn': "FadeIn 0.3s ease-in-out",
-        'FlipOut':"FlipOut 0.3s ease-in-out forwards"
+        'FlipOut':"FlipOut 0.3s ease-in-out forwards",
+        "SlideOutRight" : "SlideOutRight 0.5s ease-in-out forwards"
       }
     },
   },
