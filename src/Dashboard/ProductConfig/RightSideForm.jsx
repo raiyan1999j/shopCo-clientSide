@@ -11,7 +11,7 @@ import {
 } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 
-export default function RightSideForm({conditionLoading,inputChange,itemsRemove }) {
+export default function RightSideForm({conditionLoading,inputChange,alertRemove }) {
   const [selectedImg, setSelection] = useState();
   const [imageContainer, setImgContainer] = useState([]);
   const [imageObj, setImageObj] = useState([]);
@@ -252,7 +252,7 @@ export default function RightSideForm({conditionLoading,inputChange,itemsRemove 
           inputChange?
           <div className="flex flex-row w-full mt-4">
             <div className="w-[220.5px]">
-            <button className=" h-12 w-full border border-[#232321] rounded-lg text-[#232321] text-sm font-medium font-rubik tracking-tighter uppercase leading-normal transition-all duration-150 ease-in hover:text-white hover:bg-rose-900 hover:border-rose-900" onClick={()=>{itemsRemove()}}>
+            <button className=" h-12 w-full border border-[#232321] rounded-lg text-[#232321] text-sm font-medium font-rubik tracking-tighter uppercase leading-normal transition-all duration-150 ease-in hover:text-white hover:bg-rose-900 hover:border-rose-900" onClick={()=>{alertRemove(true)}}>
               Remove
             </button>
             </div>

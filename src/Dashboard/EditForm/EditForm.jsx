@@ -10,11 +10,13 @@ import { useEffect, useState } from "react";
 import LeftSideForm from "../ProductConfig/LeftSideForm";
 import RightSideForm from "../ProductConfig/RightSideForm";
 import ModalBox from "../../ModalBox/ModalBox";
+import ConfirmationRemove from "./ConfimationRemove";
 
 export default function EditForm(){
     const {state} = useLocation();
     const navigate = useNavigate();
     const [modalCall,setModalCall] = useState();
+    const [removeAlert,setRemoveAlert] = useState(false);
 
     const {isPending,isError,data} = useQuery({
         queryKey:['specificProduct'],
@@ -120,7 +122,7 @@ export default function EditForm(){
                         <LeftSideForm inputChange={true}/>
                         <RightSideForm 
                          inputChange={true}
-                         itemsRemove={(value)=>{removeItems(value)}}
+                         alertRemove={(value)=>{setRemoveAlert(value)}}
                          />
                     </div>
                 </Formik>
@@ -128,6 +130,10 @@ export default function EditForm(){
                 </div>
             </section>
             <ModalBox modalInfo={modalCall}/>
+            {
+                removeAlert?
+                <ConfirmationRemove alertRemove={(value)=>{setRemoveAlert(value)}}/>:""
+            }
         </>
     )
 }

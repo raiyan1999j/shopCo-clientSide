@@ -32,6 +32,10 @@ export default {
           "0%":{transform: "translateX(17.5%)"},
           "50%":{transform: "translateX(5%)"},
           "100%":{transform: "translateX(100%)"}
+        },
+        FadeOutSmall:{
+          "0%":{transform: "scale(1.5)",opacity:"1"},
+          "100%":{transform: "scale(0.5)",opacity:"0"}
         }
       },
       animation:{
@@ -44,7 +48,8 @@ export default {
         'bounce-three':'bounce 0.5s infinite 0.2s',
         'FadeIn': "FadeIn 0.3s ease-in-out",
         'FlipOut':"FlipOut 0.3s ease-in-out forwards",
-        "SlideOutRight" : "SlideOutRight 0.5s ease-in-out forwards"
+        "SlideOutRight" : "SlideOutRight 0.5s ease-in-out forwards",
+        "FadeOutSmall": "FadeOutSmall 0.5s ease-in-out forwards"
       }
     },
   },
