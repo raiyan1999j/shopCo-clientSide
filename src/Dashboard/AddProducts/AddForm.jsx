@@ -1,6 +1,4 @@
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
-import LeftSide from "./LeftSide";
-import RightSide from "./RightSide";
 import { Form, Formik } from "formik";
 import { useMutation } from "@tanstack/react-query";
 import { publicRoute } from "../../AxiosBase/PublicRoute";
@@ -36,7 +34,7 @@ export default function AddForm(){
         description:"",
         category:"",
         brandName:"",
-        sku:`place product name_${uniqueValue}`,
+        sku:`sku_${uniqueValue}`,
         stock:"",
         regularPrice:"",
         salePrice:"",
@@ -112,21 +110,6 @@ export default function AddForm(){
                         </h4>
                     </div>
                 </div>
-
-                {/* <div className="w-[1108px] mx-auto bg-white rounded-2xl">
-                <Formik enableReinitialize initialValues={primaryValue} onSubmit={(value, {resetForm})=>{
-                finalValue(value)
-                resetForm()
-                }}>
-                {({setFieldValue})=>(
-                    <div className="flex flex-row w-full px-6 py-6">
-                        <LeftSide/>
-                        <RightSide 
-                        conditionLoading={loadingCondition} setFieldValue={setFieldValue}/>
-                    </div>
-                )}
-                </Formik>
-                </div> */}
 
                 <div className="w-[1108px] mx-auto bg-white rounded-2xl">
                 <Formik enableReinitialize initialValues={primaryValue} onSubmit={(value, {resetForm})=>{

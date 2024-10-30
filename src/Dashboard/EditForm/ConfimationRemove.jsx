@@ -4,7 +4,7 @@ import { CiTrash } from "react-icons/ci";
 import { FaC, FaCheck } from "react-icons/fa6";
 import { RxCross2 } from "react-icons/rx";
 
-export default function ConfirmationRemove({alertRemove}){
+export default function ConfirmationRemove({alertRemove, itemsRemove}){
     const [condition,setCondition] = useState(true);
     const [confirmation,setConfirmation] = useState(false);
     const [modalCondition,setModalCondition] = useState(true);
@@ -18,6 +18,7 @@ export default function ConfirmationRemove({alertRemove}){
 
         setTimeout(()=>{
             setModalCondition(false)
+            itemsRemove("click");
         },1000)
     }
     const cancelRemove=()=>{

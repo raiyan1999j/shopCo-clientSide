@@ -1,7 +1,5 @@
 import { Formik } from "formik";
 import { useLocation, useNavigate } from "react-router-dom"
-import LeftSide from "../AddProducts/LeftSide";
-import RightSide from "../AddProducts/RightSide";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { publicRoute } from "../../AxiosBase/PublicRoute";
@@ -43,7 +41,16 @@ export default function EditForm(){
 
     const removeDocs= useMutation({
         mutationFn:(value)=>{
-            return publicRoute.delete(`/removeProductsInfo?title=${value.title}&&trackId=${value.trackId}&&sku=${value.sku}`)
+            return publicRoute.put(`/removeProductsInfo?title=${value.title}&&trackId=${value.trackId}&&sku=${value.sku}`).then((res)=>{
+                if(res.status == 200){
+                    setModalCall({activity:"removeItem",message:"your product has removed",clearTimer:2500});
+
+                    setTimeout(()=>{
+                        setModalCall()
+                        navigate("/dashboard/allProducts")
+                    },2500)
+                }
+            }) 
         }
     })
 
@@ -61,7 +68,9 @@ export default function EditForm(){
             sku: state.sku
         }
 
-        removeDocs.mutate(wrap)
+        if(value == "click"){
+            removeDocs.mutate(wrap)
+        }
     }
     const primaryValue={
         productName:data?.productName,
@@ -132,7 +141,10 @@ export default function EditForm(){
             <ModalBox modalInfo={modalCall}/>
             {
                 removeAlert?
-                <ConfirmationRemove alertRemove={(value)=>{setRemoveAlert(value)}}/>:""
+                <ConfirmationRemove 
+                alertRemove={(value)=>{setRemoveAlert(value)}}
+                itemsRemove={(value)=>{removeItems(value)}}
+                />:""
             }
         </>
     )
