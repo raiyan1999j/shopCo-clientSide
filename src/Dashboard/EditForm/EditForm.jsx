@@ -82,7 +82,9 @@ export default function EditForm(){
         regularPrice:data?.regularPrice,
         salePrice:data?.salePrice,
         tag:state.title,
-        image:data?.image
+        image:data?.image,
+        checked:data?.checked,
+        color:data?.color
     }
     return(
         <>

@@ -39,7 +39,9 @@ export default function AddForm(){
         regularPrice:"",
         salePrice:"",
         tag:"",
-        image:[]
+        image:[],
+        checked:[],
+        color:[]
     }
     const finalValue=(value)=>{
         const copy = {...value};
