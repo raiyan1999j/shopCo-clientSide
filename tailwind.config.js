@@ -36,6 +36,12 @@ export default {
         FadeOutSmall:{
           "0%":{transform: "scale(1.5)",opacity:"1"},
           "100%":{transform: "scale(0.5)",opacity:"0"}
+        },
+        DotLoader:{
+          "0%":{'box-shadow':'20px 0 #000, -20px 0 #0002',background:'#000'},
+          "33%": {'box-shadow':'20px 0 #000, -20px 0 #0002',background: '#0002'},
+          '66%': {'box-shadow': '20px 0 #0002,-20px 0 #000', background: '#0002'},
+          '100%':{'box-shadow': '20px 0 #0002,-20px 0 #000', background: '#000' }
         }
       },
       animation:{
@@ -49,7 +55,8 @@ export default {
         'FadeIn': "FadeIn 0.3s ease-in-out",
         'FlipOut':"FlipOut 0.3s ease-in-out forwards",
         "SlideOutRight" : "SlideOutRight 0.5s ease-in-out forwards",
-        "FadeOutSmall": "FadeOutSmall 0.5s ease-in-out forwards"
+        "FadeOutSmall": "FadeOutSmall 0.5s ease-in-out forwards",
+        "DotLoader" : "DotLoader 1s infinite linear alternate"
       }
     },
   },

@@ -52,7 +52,7 @@ export default function LeftSideForm({inputChange}) {
   useEffect(()=>{
     setFieldValue('checked',checkedValue)
     setFieldValue('color',colorCode)
-  },[checkedValue,colorCode]);
+  },[]);
 
   useEffect(()=>{
     if(values.checked){

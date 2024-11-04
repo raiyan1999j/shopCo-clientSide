@@ -41,7 +41,8 @@ export default function AddForm(){
         tag:"",
         image:[],
         checked:[],
-        color:[]
+        color:[],
+        time: new Date().toISOString()
     }
     const finalValue=(value)=>{
         const copy = {...value};
