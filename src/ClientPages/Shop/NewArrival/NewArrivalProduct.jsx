@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { FaStar, FaStarHalf } from "react-icons/fa";
 import { getDownloadURL, getStorage, ref } from "firebase/storage";
 import Dots from "../../../Preloader/Dots";
+import { useNavigate } from "react-router-dom";
 
 export default function NewArrivalProduct({info}){
     const [imageContainer,setImageContainer] = useState();
     const [imageCondition,setImageCondition] = useState(true);
+    const navigate = useNavigate();
     const {image,productName,regularPrice,salePrice,discount} = info;
 
     useEffect(()=>{

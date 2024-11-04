@@ -1,8 +1,3 @@
-import { FaStar, FaStarHalf } from "react-icons/fa";
-import New1 from "../../../../public/new1.png";
-import New2 from "../../../../public/new2.png";
-import New3 from "../../../../public/new3.png";
-import New4 from "../../../../public/new4.png"
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { publicRoute } from "../../../AxiosBase/PublicRoute";
