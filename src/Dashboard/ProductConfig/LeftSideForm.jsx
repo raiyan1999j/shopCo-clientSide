@@ -19,40 +19,31 @@ export default function LeftSideForm({inputChange}) {
   const colorCodeRef = useRef("");
 
   const checkBoxValue=(event)=>{
-    setCheckValue((items)=>{
-      if(!items.includes(event.target.value)){
-        return [...items, event.target.value]
-      }else{
-        return items.filter(presentValue=> presentValue != event.target.value)
-      }
-    })
+    if(!values.checked.includes(event.target.value)){
+      setFieldValue("checked",[...values.checked,event.target.value])
+    }else{
+      const copy = values.checked;
+      const currentArr = copy.filter(items=> items != event.target.value);
+
+      setFieldValue("checked",currentArr)
+    }
   }
 
   const getColorCode=()=>{
     const codeValue = colorCodeRef.current.value;
-
-    setColorCode((items)=>{
-      if(!items.includes(codeValue)){
-        return [...items, codeValue]
-      }
-
-      return items
-    })
+    if(!values.color.includes(codeValue)){
+      setFieldValue('color',[...values.color,codeValue])
+    }
 
     colorCodeRef.current.value = ""
   }
 
   const removeColor=(value)=>{
-    setColorCode((items)=>{
-      const array = items.filter(colorValue=> colorValue != value);
+    const copy = values.color;
+    const currentArr = copy.filter(items=> items != value);
 
-      return array;
-    })
+    setFieldValue('color',currentArr)
   }
-  useEffect(()=>{
-    setFieldValue('checked',checkedValue)
-    setFieldValue('color',colorCode)
-  },[]);
 
   useEffect(()=>{
     if(values.checked){
